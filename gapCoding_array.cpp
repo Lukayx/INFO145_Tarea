@@ -40,7 +40,7 @@ std::vector<int> creaGapCoding(std::vector<int> arregloLineal){
 }
 
 std::vector<int> creaSample(std::vector<int> arregloLineal, int m){
-  size_t n = arregloLineal.size(); //largo de arregloLineal
+  int n = arregloLineal.size(); //largo de arregloLineal
   std::vector<int> sampleArray;
   if(m<=0){ 
     std::cout << "m debe ser mayor que 0" << std::endl;
@@ -48,12 +48,12 @@ std::vector<int> creaSample(std::vector<int> arregloLineal, int m){
   }
   if(m<=n){ 
     int b = n/m; // espaciado entre los elementos del sample
-    for (size_t i = 0; i < m; i++)
+    for (int i = 0; i < m; i++)
     {
       sampleArray.push_back(arregloLineal[i*b]); // agrega elementos a sampleArray de acuerdo al espaciado especificado anteriormente
     }
   } else {
-    printf("No se pudo crear el Arreglo Sample porque m = %d no es menor que n = %ld\n", m, n);
+    printf("No se pudo crear el Arreglo Sample porque m = %d no es menor que n = %d\n", m, n);
     exit(0);
   }
   return sampleArray;
