@@ -70,40 +70,40 @@ void creaArreglos(std::vector<int> &gapCodingArray, std::vector<int> &sampleArra
     // imprimeArray(sampleArray);
 }
 
-int binarySearch(std::vector<int> sample, int left, int right, int x, int b, std::vector<int> gapCoding){
+int binarySearch(std::vector<int> sampleArray, int left, int right, int num, int b, std::vector<int> gapCoding){
   int mid = (left + right) / 2; // Calcula el indice central
   if(left<right) // if el indice izquierdo es menor que el indice derecho entonces...
   { 
-    if(sample[mid]==x) // si el valor a buscar coincide con el del arreglo sample  
+    if(sampleArray[mid]==num) // si el valor a buscar coincide con el del arreglo sampleArray  
       return b*mid; // devuelve el idice correspondiente realizando b * mid
-    sample[mid] > x ? right = mid-1 : left = mid + 1;
-    return binarySearch(sample, left, right, x, b, gapCoding);
+    sampleArray[mid] > num ? right = mid-1 : left = mid + 1;
+    return binarySearch(sampleArray, left, right, num, b, gapCoding);
   }
-  return searchX(gapCoding, sample[mid], mid*b, x); // cuando left==rigth entonces llamará a la función searchX para buscar a partir de ahí
+  return searchX(gapCoding, sampleArray[mid], mid*b, num); // cuando left==rigth entonces llamará a la función searchX para buscar a partir de ahí
 }
 
-int searchX(std::vector<int> gapCoding, int valor, int indice, int x){ // valor esta justo donde el indice indica 
-  if(valor == x) return indice; // si justo donde esta el indice es donde se encuentra x entonces devuelve el indice
-  if(valor>x) // si el valor actual se encuentra por encima de x...
+int searchX(std::vector<int> gapCoding, int valor, int indice, int num){ // valor esta justo donde el indice indica 
+  if(valor == num) return indice; // si justo donde esta el indice es donde se encuentra num entonces devuelve el indice
+  if(valor>num) // si el valor actual se encuentra por encima de num...
   { 
-    while(indice > 0 && valor > x)//irá restando mientras el valor sea mayor que 0 y x
+    while(indice > 0 && valor > num)//irá restando mientras el valor sea mayor que 0 y num
     { 
       indice--; // retrocede un indice
       valor = valor - gapCoding[indice]; // se calcula el valor del nuevo indice
-      if(valor == x) return indice; // si valor es igual al del indice actual, entonces devuelve el indice
+      if(valor == num) return indice; // si valor es igual al del indice actual, entonces devuelve el indice
     }
   } 
   else 
   {
     int n = gapCoding.size()-1; 
-    while(indice < n && valor < x) //irá sumando mientras el valor sea menor que n y x
+    while(indice < n && valor < num) //irá sumando mientras el valor sea menor que n y num
     { 
       indice++; // avanza un indice
       valor = valor + gapCoding[indice];// se calcula el valor del nuevo indice
-      if(valor == x) return indice; // si valor es igual al del indice actual, entonces devuelve el indice
+      if(valor == num) return indice; // si valor es igual al del indice actual, entonces devuelve el indice
     }
   }
-  return -1; // devuelve -1 si no logró encontrar el valor x
+  return -1; // devuelve -1 si no logró encontrar el valor num
 }
 
 void imprimeArray(std::vector<int> v){
