@@ -65,7 +65,8 @@
     "numbers": "cpp",
     "cstdarg": "cpp",
     "fstream": "cpp",
-    "sstream": "cpp"
+    "sstream": "cpp",
+    "iomanip": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,17 +1,31 @@
 #include <iostream>
 #include <vector>
-#include <ctime>
-#include <cstdlib>
-
+#include <random>
+#include <algorithm>
+#include <chrono> // Necesario para std::chrono y medir tiempos
+#include <iomanip> //este sirve para la subpresición del tiempo que tarda
 using namespace std;
 
-// creacion del arreglo con distribución lineal
+// Creación del arreglo con distribución lineal
 vector<int> crearArrayLineal(size_t size, int epsilon) {
     vector<int> array;
-    array.push_back(rand() % 100); //primer elemento
+    array.push_back(rand() % 100); // Primer elemento
     for (size_t i = 1; i < size; ++i) {
-      array.push_back(array.back() + rand() % epsilon);
+        array.push_back(array.back() + rand() % epsilon);
     }
+    return array;
+}
+
+// Generar un arreglo con distribución normal
+vector<int> generarArregloNormal(size_t tamano, double media, double desviacionEstandar) {
+    default_random_engine generador;
+    normal_distribution<double> distribucion(media, desviacionEstandar);
+    
+    vector<int> array(tamano);
+    for (int i = 0; i < tamano; ++i) {
+        array[i] = static_cast<int>(distribucion(generador)); // Generar valores con distribución normal
+    }
+    sort(array.begin(), array.end()); // Ordenar el arreglo
     return array;
 }
 
@@ -21,35 +35,68 @@ int binary_search(const vector<int>& arr, int x) {
     while (l <= r) {
         int mid = l + (r - l) / 2;
         if (arr[mid] == x) {
-          return mid;
-        }else if (arr[mid] < x) {
-          l = mid + 1;
-        }else {
-          r = mid - 1;
+            return mid;
+        } else if (arr[mid] < x) {
+            l = mid + 1;
+        } else {
+            r = mid - 1;
         }
     }
     return -1;
 }
 
-// Medir el tiempo de ejecución de busqueda binaria
+// Medir el tiempo de ejecución de búsqueda binaria usando std::chrono
 double medirTiempo(const vector<int>& array, int numx) {
-    clock_t inicio = clock();
-    binary_search(array, numx);
-    clock_t fin = clock();
-    return static_cast<double> (fin - inicio) / CLOCKS_PER_SEC;
+    auto inicio = chrono::steady_clock::now(); // Captura el tiempo de inicio
+    binary_search(array, numx); // Realiza la búsqueda binaria
+    auto fin = chrono::steady_clock::now(); // Captura el tiempo de fin
+
+    // Calcula la duración en segundos como un valor de tipo double
+    return chrono::duration<double>(fin - inicio).count();
 }
+int main(int argc, char *argv[]) {
+    // Verificar que se proporcionen los argumentos correctos
+    if (argc < 3) {
+        cout << "Uso: " << argv[0] << " <size> <epsilon>" << endl;
+        return 1;
+    }
 
-int main() {
-    srand(time(0));// semilla para los números aleatorios
-    size_t size = 1000000;  // largo de el array
-    int epsilon = 10;
+    // Obtener los valores de size y epsilon desde los argumentos
+    size_t size = atoi(argv[1]);
+    int epsilon = atoi(argv[2]);
 
-    // Inicialización arrays
+    double media = 50;
+    double desviacionEstandar = 10;
+
+    // Inicialización de los arrays
     vector<int> arrayLineal = crearArrayLineal(size, epsilon);
+    vector<int> arrayNormal = generarArregloNormal(size, media, desviacionEstandar);
 
-    // Medición experimental
-    int numero = arrayLineal[rand() % size]; // numero a buscar
-    double tarraylineal = medirTiempo(arrayLineal, numero); // inicia busqueda binaria y mide el tiempo
-    cout << "Busqueda binaria en Array lineal de tamaño"<< size << ",demoró :" << tarraylineal;
+    // // Imprimir el arreglo lineal
+    // cout << "Array Lineal:" << endl;
+    // for (auto i : arrayLineal) {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    // // Imprimir el arreglo normal
+    // cout << "Array Normal:" << endl;
+    // for (auto i : arrayNormal) {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    // Medición experimental en el arreglo lineal
+    int numeroLineal = arrayLineal[rand() % size]; // Número a buscar
+    double tarrayLineal = medirTiempo(arrayLineal, numeroLineal); // Inicia búsqueda binaria y mide el tiempo
+    cout << "Binary Search en Array lineal de largo " << size 
+         << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
+
+    // Medición experimental en el arreglo normal
+    int numeroNormal = arrayNormal[rand() % size]; // Número a buscar
+    double tarrayNormal = medirTiempo(arrayNormal, numeroNormal); // Inicia búsqueda binaria y mide el tiempo
+    cout << "Binary Search en Array normal de largo " << size 
+         << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
+
     return 0;
 }
