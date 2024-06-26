@@ -48,6 +48,24 @@
     "xlocnum": "cpp",
     "xloctime": "cpp",
     "xmemory": "cpp",
-    "xtr1common": "cpp"
-  }
+    "xtr1common": "cpp",
+    "array": "cpp",
+    "*.tcc": "cpp",
+    "cwctype": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "algorithm": "cpp",
+    "functional": "cpp",
+    "memory_resource": "cpp",
+    "numeric": "cpp",
+    "optional": "cpp",
+    "random": "cpp",
+    "string_view": "cpp",
+    "numbers": "cpp",
+    "cstdarg": "cpp",
+    "fstream": "cpp",
+    "sstream": "cpp"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }
