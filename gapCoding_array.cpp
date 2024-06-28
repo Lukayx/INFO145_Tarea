@@ -1,6 +1,6 @@
 #include "gapCodingArray.h"
 
-const int EPSILON = 10;
+const int EPSILON = 30;
 
 int main(int argc, const char* argv[]){
   if(argc <= 3) 
@@ -50,7 +50,7 @@ std::vector<int> creaArregloLineal(int n) {
 std::vector<int> creaGapCoding(std::vector<int> arregloLineal){
   // imprimeArray(arregloLineal);
   std::vector<int> gapCoding_Array;
-  size_t n = arregloLineal.n();
+  size_t n = arregloLineal.size();
   gapCoding_Array.push_back(arregloLineal[0]); //inicia el gapCoding con el valor inicial del arregloLineal
   for (size_t i = 1; i < n; i++)
   {
@@ -60,7 +60,7 @@ std::vector<int> creaGapCoding(std::vector<int> arregloLineal){
 }
 
 std::vector<int> creaSample(std::vector<int> arregloLineal, int m, int b){
-  int n = arregloLineal.n(); //largo de arregloLineal
+  int n = arregloLineal.size(); //largo de arregloLineal
   std::vector<int> sampleArray;
   if(m<=0){ 
     std::cout << "m debe ser mayor que 0" << std::endl;
@@ -111,7 +111,7 @@ int searchValor(std::vector<int> gapCoding, int valor, int indice, int num){ // 
   } 
   else 
   {
-    int n = gapCoding.n()-1; 
+    int n = gapCoding.size()-1; 
     while(indice < n && valor < num) //irá sumando mientras el valor sea menor que n y num
     { 
       indice++; // avanza un indice
@@ -123,7 +123,7 @@ int searchValor(std::vector<int> gapCoding, int valor, int indice, int num){ // 
 }
 
 void imprimeArray(std::vector<int> v){
-  for (size_t i = 0; i < v.n(); i++)
+  for (size_t i = 0; i < v.size(); i++)
     std::cout << v[i] << "  ";
   std::cout << "\n\n";
 }

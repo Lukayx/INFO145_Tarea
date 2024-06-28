@@ -6,7 +6,6 @@ all: clean explicitArray gapCoding gapPacked
 
 explicitArray:
 	$(CC) $(CFLAGS) -o explicitArray explicitArray.cpp
-
 gapCoding:
 	$(CC) $(CFLAGS) -o gapsCoding gapCoding_array.cpp
 gapPacked:
