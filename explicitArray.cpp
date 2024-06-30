@@ -22,7 +22,7 @@ vector<int> generarArregloNormal(size_t tamano, double media, double desviacionE
     normal_distribution<double> distribucion(media, desviacionEstandar);
     
     vector<int> array(tamano);
-    for (int i = 0; i < tamano; ++i) {
+    for (size_t i = 0; i < tamano; ++i) {
         array[i] = static_cast<int>(distribucion(generador)); // Generar valores con distribución normal
     }
     sort(array.begin(), array.end()); // Ordenar el arreglo
@@ -54,6 +54,7 @@ double medirTiempo(const vector<int>& array, int numx) {
     // Calcula la duración en segundos como un valor de tipo double
     return chrono::duration<double>(fin - inicio).count();
 }
+
 int main(int argc, char *argv[]) {
     // Verificar que se proporcionen los argumentos correctos
     if (argc < 3) {
@@ -90,13 +91,12 @@ int main(int argc, char *argv[]) {
     int numeroLineal = arrayLineal[rand() % size]; // Número a buscar
     double tarrayLineal = medirTiempo(arrayLineal, numeroLineal); // Inicia búsqueda binaria y mide el tiempo
     cout << "Binary Search en Array lineal de largo " << size 
-         << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
+            << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
 
     // Medición experimental en el arreglo normal
     int numeroNormal = arrayNormal[rand() % size]; // Número a buscar
     double tarrayNormal = medirTiempo(arrayNormal, numeroNormal); // Inicia búsqueda binaria y mide el tiempo
     cout << "Binary Search en Array normal de largo " << size 
-         << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
-
+            << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
     return 0;
 }

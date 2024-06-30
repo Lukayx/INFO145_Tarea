@@ -66,7 +66,15 @@
     "cstdarg": "cpp",
     "fstream": "cpp",
     "sstream": "cpp",
-    "iomanip": "cpp"
+    "iomanip": "cpp",
+    "chrono": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "queue": "cpp",
+    "ranges": "cpp",
+    "ratio": "cpp",
+    "span": "cpp",
+    "xhash": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }
