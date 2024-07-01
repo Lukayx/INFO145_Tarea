@@ -18,7 +18,6 @@ vector<int> crearArrayLineal(size_t size, int epsilon) {
 
 // Generar un arreglo con distribución normal
 vector<int> generarArregloNormal(size_t tamano, double media, double desviacionEstandar) {
-    default_random_engine generador;
     normal_distribution<double> distribucion(media, desviacionEstandar);
     
     vector<int> array(tamano);
