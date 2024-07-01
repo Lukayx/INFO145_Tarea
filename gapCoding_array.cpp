@@ -1,6 +1,5 @@
 #include "gapCodingArray.h"
 
-const int EPSILON = 30;
 
 int main(int argc, const char* argv[]){
   int n, m, b, value;
@@ -10,44 +9,42 @@ int main(int argc, const char* argv[]){
   }
 
   srand(time(0));// semilla para los números aleatorios
-  std::random_device rd;
-  std::mt19937 generador(rd());
 
-  double media = (n * EPSILON) / 2.0;
-  double desviacionEstandar = EPSILON;
+  int epsilon = 30;
+  double media = 50;
+  double desviacionEstandar = 10;
   b = n/m;
 
   //A PARTIR DE AQUI COMIENZA A CREAR LOS ARREGLOS Y BUSCAR EL VALOR
-  creaArreglos(n, m, b, media, desviacionEstandar, value, generador);
+  creaArreglos(n, m, b, media, desviacionEstandar, value, epsilon);
 
   return EXIT_SUCCESS;
 }
 
-// creacion del arreglo con distribución lineal
-std::vector<int> creaArregloLineal(int n, std::mt19937& generador) {
+// Creación del arreglo con distribución lineal
+std::vector<int> creaArregloLineal(size_t size, int epsilon) {
   std::vector<int> array;
-  if(n > 0){
-    array.push_back(rand() % 100); //primer elemento
-
-    for (int i = 1; i < n; ++i) 
-    {
-      array.push_back(array.back() + rand() % EPSILON);//agrega siguiente elemento con una diferencia de 0 a EPSILON
+  if(size > 0){
+    array.push_back(rand() % 100); // Primer elemento
+    for (size_t i = 1; i < size; ++i) {
+      array.push_back(array.back() + rand() % epsilon);
     }
   } else {
-    printf("No se pudo crear el Arreglo Lineal porque n = %d no es mayor que 0\n", n);
+    printf("No se pudo crear el Arreglo Lineal porque n = %ld no es mayor que 0\n", size);
     exit(0);
-  }
-
+  }    
   return array;
 }
 
-std::vector<int> generarArregloNormal(size_t n, double media, double desviacionEstandar, std::mt19937& generador) {
+// Generar un arreglo con distribución normal
+std::vector<int> generarArregloNormal(size_t tamano, double media, double desviacionEstandar) {
   std::normal_distribution<double> distribucion(media, desviacionEstandar);
-  
-  std::vector<int> array(n);
-  for (size_t i = 0; i < n; ++i) {
+  std::default_random_engine generador;
+  std::vector<int> array(tamano);
+  for (size_t i = 0; i < tamano; ++i) {
       array[i] = static_cast<int>(distribucion(generador)); // Generar valores con distribución normal
   }
+
   sort(array.begin(), array.end()); // Ordenar el arreglo
   return array;
 }
@@ -67,27 +64,30 @@ std::vector<unsigned char> creaGapCoding(std::vector<int> arregloLineal, int n){
 
 std::vector<int> creaSample(std::vector<int> arregloLineal, int m, int n, int b){
   std::vector<int> sampleArray;
+
   if(m>=n){ 
     printf("No se pudo crear el Arreglo Sample porque m = %d no es menor que n = %d\n", m, n);
     exit(0);
   }
-  for (int i = 0; i < m; i++)
-  {
+
+  for (int i = 0; i < m; i++){
     sampleArray.push_back(arregloLineal[i*b]); // agrega elementos a sampleArray de acuerdo al espaciado especificado anteriormente
   }
+
   return sampleArray;
 }
 
-void creaArreglos(int n, int m, int b, double media, double desviacionEstandar, int value, std::mt19937& generador){
+void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int value, int epsilon){
   std::cout << "-------------------------------------------------------------------------" << std::endl;
   {
-    std::vector<int> arregloLineal = creaArregloLineal(n, generador);
-    std::cout << "\nNumero a buscar: " <<  valor << std::endl;
+    std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
+    std::cout << "\nNumero a buscar: " <<  value << std::endl;
 
     //REPRESENTACION DE DISTRIBUCION LINEAL
     std::vector<unsigned char> gapCodingArray1 = creaGapCoding(arregloLineal, n);
     std::vector<int> sampleArray1 = creaSample(arregloLineal, m, n, b);
 
+    imprimeArray(arregloLineal);
     // Libera la memoria de arregloLineal
     arregloLineal.clear();
     arregloLineal.shrink_to_fit();
@@ -100,17 +100,17 @@ void creaArreglos(int n, int m, int b, double media, double desviacionEstandar, 
   std::cout << "-------------------------------------------------------------------------" << std::endl;
 
   {
-    std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar, generador);
-    std::cout << "\nNumero a buscar: " <<  valor << std::endl;
+    std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
+    std::cout << "\nNumero a buscar: " <<  value << std::endl;
 
     //REPRESENTACION DE DISTRIBUCION NORMAL
     std::vector<unsigned char > gapCodingArray2 = creaGapCoding(arregloNormal, n);
     std::vector<int> sampleArray2 = creaSample(arregloNormal, m, n, b);  
 
+    imprimeArray(arregloNormal);
     // Libera la memoria de arregloNormal
     arregloNormal.clear();
     arregloNormal.shrink_to_fit();
-
     std::cout << "_--------------------------DISTRIBUCION NORMAL--------------------------_\n" << std::endl;
     double distribucionNormal = medirTiempo(gapCodingArray2, sampleArray2, m, b, value);
     std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << distribucionNormal << " segundos\n" << std::endl;

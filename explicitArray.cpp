@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-
 #include <random>
 #include <algorithm>
 #include <chrono> // Necesario para std::chrono y medir tiempos
@@ -20,7 +19,7 @@ vector<int> crearArrayLineal(size_t size, int epsilon) {
 // Generar un arreglo con distribución normal
 vector<int> generarArregloNormal(size_t tamano, double media, double desviacionEstandar) {
     normal_distribution<double> distribucion(media, desviacionEstandar);
-    
+    default_random_engine generador;
     vector<int> array(tamano);
     for (size_t i = 0; i < tamano; ++i) {
         array[i] = static_cast<int>(distribucion(generador)); // Generar valores con distribución normal
@@ -49,7 +48,7 @@ int binary_search(const vector<int>& arr, int x) {
 double medirTiempo(const vector<int>& array, int numx) {
     auto inicio = chrono::steady_clock::now(); // Captura el tiempo de inicio
     binary_search(array, numx); // Realiza la búsqueda binaria
-    auto fin = chrono::steady_clock::now(); // Captura el tiempo de f
+    auto fin = chrono::steady_clock::now(); // Captura el tiempo de fin
 
     // Calcula la duración en segundos como un valor de tipo double
     return chrono::duration<double>(fin - inicio).count();
@@ -67,39 +66,36 @@ int main(int argc, char *argv[]) {
     int epsilon = atoi(argv[2]);
 
     double media = 50;
-    //double media = (size * epsilon) / 2;
     double desviacionEstandar = 10;
-    srand(time(0)); // semilla
 
     // Inicialización de los arrays
     vector<int> arrayLineal = crearArrayLineal(size, epsilon);
     vector<int> arrayNormal = generarArregloNormal(size, media, desviacionEstandar);
 
-    // Imprimir el arreglo lineal
-    //cout << "Array Lineal:" << endl;
+    // // Imprimir el arreglo lineal
+    // cout << "Array Lineal:" << endl;
     // for (auto i : arrayLineal) {
-    //    cout << i << " ";
+    //     cout << i << " ";
     // }
-    //cout << endl;
+    // cout << endl;
 
-    // Imprimir el arreglo normal
-    //cout << "Array Normal:" << endl;
+    // // Imprimir el arreglo normal
+    // cout << "Array Normal:" << endl;
     // for (auto i : arrayNormal) {
-    //   cout << i << " ";
+    //     cout << i << " ";
     // }
-    //cout << endl;
-
+    // cout << endl;
 
     // Medición experimental en el arreglo lineal
     int numeroLineal = arrayLineal[rand() % size]; // Número a buscar
     double tarrayLineal = medirTiempo(arrayLineal, numeroLineal); // Inicia búsqueda binaria y mide el tiempo
-    cout << numeroLineal<<"Binary Search en Array lineal de largo " << size 
+    cout << "Binary Search en Array lineal de largo " << size 
             << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
 
     // Medición experimental en el arreglo normal
     int numeroNormal = arrayNormal[rand() % size]; // Número a buscar
     double tarrayNormal = medirTiempo(arrayNormal, numeroNormal); // Inicia búsqueda binaria y mide el tiempo
-    cout << numeroNormal << "Binary Search en Array normal de largo " << size 
+    cout << "Binary Search en Array normal de largo " << size 
             << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
     return 0;
 }
