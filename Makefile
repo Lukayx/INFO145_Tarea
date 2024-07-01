@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-Wall -std=c++17
-BINS=problema
+BINS= explicitArray gapsCoding gapsPacked
 PROFILEFLAGS=-g -O0 -Wall -DVERBOSE
 all: clean explicitArray gapCoding gapPacked
 

@@ -1,0 +1,13 @@
+# Ignorar archivos binarios y objetos de compilación
+*.o
+*.out
+*.exe
+explicitArray
+
+# Ignorar archivos de registro y temporales
+*.log
+*.tmp
+
+# Ignorar directorios de compilación
+build/
+bin/
