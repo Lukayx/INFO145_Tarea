@@ -1,8 +1,8 @@
-#include "../src/creacionProg_1.cpp"
+#include "../include/creacionProg_1.h"
 #include "include/gapCodingArray.h"
-#include "src/busquedaProg_2.cpp"
-#include "src/creacionProg_2.cpp"
-#include "src/extrasProg_2.cpp"
+#include "include/busquedaProg_2.h"
+#include "include/creacionProg_2.h"
+#include "include/extrasProg_2.h"
 
 int main(int argc, const char* argv[]){
   int n, m, b, value;

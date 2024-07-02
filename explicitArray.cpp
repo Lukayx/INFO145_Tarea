@@ -1,6 +1,6 @@
 #include "include/explicitArray.h"
-#include "src/creacionProg_1.cpp"
-#include "src/busquedaProg_1.cpp"
+#include "include/creacionProg_1.h"
+#include "include/busquedaProg_1.h"
 
 using namespace std;
 
