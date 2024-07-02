@@ -5,11 +5,11 @@ PROFILEFLAGS=-g -O0 -Wall -DVERBOSE
 all: clean explicitArray gapCoding gapPacked
 
 explicitArray:
-	$(CC) $(CFLAGS) -o explicitArray explicitArray.cpp
+	$(CC) $(CFLAGS) -o bin/explicitArray explicitArray.cpp
 gapCoding:
-	$(CC) $(CFLAGS) -o gapsCoding gapCoding_array.cpp
+	$(CC) $(CFLAGS) -o bin/gapsCoding prog_2/gapCoding_array.cpp
 gapPacked:
-	$(CC) $(CFLAGS) -o gapsPacked gapPacked_Array.cpp
+	$(CC) $(CFLAGS) -o bin/gapsPacked prog_3/gapPacked_Array.cpp
 
 clean:
 	@echo " [CLN] Removing binary files"

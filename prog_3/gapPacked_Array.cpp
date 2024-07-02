@@ -1,6 +1,4 @@
 #include "gapPacked_Array.h"
-#include <cstdlib>
-#include <ctime>
 
 int main() {
   srand(time(0));               
@@ -38,6 +36,7 @@ int main() {
   deleteHuffmanTree(root); // Liberar la memoria del árbol de Huffman
   return EXIT_SUCCESS;
 }
+
 void creaArreglos(std::vector<int>& gapCodingArray, std::vector<int>& sampleArray, size_t size, int epsilon, int m, int b) {
     // Implementación de creaArreglos
     // Ejemplo básico
@@ -46,6 +45,7 @@ void creaArreglos(std::vector<int>& gapCodingArray, std::vector<int>& sampleArra
         sampleArray.push_back(i % m); // Llenando sampleArray con algún valor de ejemplo
     }
 }
+
 // Función que compara las frecuencias de los nodos        
 bool compareNodes(nodeH* a, nodeH* b){   
   if (a->frec > b->frec) 

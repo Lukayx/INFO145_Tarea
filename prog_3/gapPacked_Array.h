@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 struct HuffmanNode{       
   char data;              // Data del nodo
@@ -16,8 +18,6 @@ struct HuffmanNode{
     this->der = nullptr;
   }
 }; typedef struct HuffmanNode nodeH;
-
-
 
 bool compareNodes(nodeH* a, nodeH* b); // Función que compara las frecs de nodos
 
