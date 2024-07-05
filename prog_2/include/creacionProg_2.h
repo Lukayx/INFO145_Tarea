@@ -4,5 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 
-std::vector<unsigned char> creaGapCoding(std::vector<int> arregloLineal, int n);
-std::vector<int> creaSample(std::vector<int> arregloLineal, int m, int n, int b);
+template <typename T>
+std::vector<T> creaGapCoding(std::vector<int>& arreglo, int n);
+
+std::vector<int> creaSample(std::vector<int>& arreglo, int m, int n, int b);

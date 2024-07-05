@@ -12,18 +12,17 @@ COMPILED_DIR = bin
 CC = g++
 CFLAGS = -Wall -std=c++17
 BINS = $(COMPILED_DIR)/explicitArray $(COMPILED_DIR)/gapCoding $(COMPILED_DIR)/gapPacked
-PROFILEFLAGS = -g -O0 -Wall -DVERBOSE
 
 all: clean $(BINS)
 
 $(COMPILED_DIR)/explicitArray: explicitArray.cpp $(SRC_DIR1)/*.cpp
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR1) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(COMPILED_DIR)/gapCoding: $(PROG_2)/gapCoding_array.cpp $(SRC_DIR2)/*.cpp $(SRC_DIR1)/creacionProg_1.cpp
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR2) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(COMPILED_DIR)/gapPacked: $(PROG_3)/gapPacked_array.cpp $(SRC_DIR3)/*.cpp
-	$(CC) $(CFLAGS) -I$(INCLUDE_DIR3) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	@echo " [CLN] Removing binary files"

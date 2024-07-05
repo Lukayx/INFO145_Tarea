@@ -15,28 +15,28 @@ int main(int argc, char *argv[]) {
     size_t size = atoi(argv[1]);
     int epsilon = atoi(argv[2]);
 
-    double media = 50;
+    double media = size*epsilon/4;
     //double media = (size * epsilon) / 2;
-    double desviacionEstandar = 10;
+    double desviacionEstandar = 30;
     srand(time(0)); // semilla
 
     // Inicialización de los arrays
     vector<int> arrayLineal = creaArregloLineal(size, epsilon);
     vector<int> arrayNormal = generarArregloNormal(size, media, desviacionEstandar);
 
-    // Imprimir el arreglo lineal
-    cout << "Array Lineal:" << endl;
-    for (auto i : arrayLineal) {
-        cout << i << " ";
-    }
-    cout << endl;
+    // // Imprimir el arreglo lineal
+    // cout << "Array Lineal:" << endl;
+    // for (auto i : arrayLineal) {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
 
-    // Imprimir el arreglo normal
-    cout << "Array Normal:" << endl;
-    for (auto i : arrayNormal) {
-        cout << i << " ";
-    }
-    cout << endl;
+    // // Imprimir el arreglo normal
+    // cout << "Array Normal:" << endl;
+    // for (auto i : arrayNormal) {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
 
 
     // Medición experimental en el arreglo lineal

@@ -2,6 +2,14 @@
 
 #include <iostream>
 #include <vector>
+#include <limits>
+#include <variant>
 
-void imprimeArray(std::vector<int> v);
+using TipoVariant = std::variant<unsigned char, short, int>;
+
+template <typename T>
+void imprimeArray(std::vector<T>& v);
+
+TipoVariant retornaTipo(int primerValor);
+
 bool convertirArgumentos(int argc, const char* argv[], int& n, int& m, int& value);

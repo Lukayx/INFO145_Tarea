@@ -74,7 +74,8 @@
     "ranges": "cpp",
     "ratio": "cpp",
     "span": "cpp",
-    "xhash": "cpp"
+    "xhash": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

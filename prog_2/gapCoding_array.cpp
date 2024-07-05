@@ -13,9 +13,9 @@ int main(int argc, const char* argv[]){
 
   srand(time(0));// semilla para los números aleatorios
   b = n/m;
-  int epsilon = 30;
-  double media = 50;
-  double desviacionEstandar = 10;
+  int epsilon = 21;
+  double media = n*epsilon/4;
+  double desviacionEstandar = 30;
 
   //A PARTIR DE AQUI COMIENZA A CREAR LOS ARREGLOS Y BUSCAR EL VALOR
   creaArreglos(n, m, b, media, desviacionEstandar, value, epsilon);
@@ -24,41 +24,33 @@ int main(int argc, const char* argv[]){
 }
 
 void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int value, int epsilon){
-  {
-    std::cout << "\n_--------------------------DISTRIBUCION LINEAL--------------------------_\n" << std::endl;
-    std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
-    std::cout << "\nNumero a buscar: " <<  value << std::endl;
+  auto imprimirYMedir = [&](auto&& arreglo, const std::string& distribucionNombre) {
+    std::cout << "\n_--------------------------" << distribucionNombre << "--------------------------_\n" << std::endl;
+    std::cout << "Numero a buscar: " <<  value << "\n" <<std::endl;
 
-    //REPRESENTACION DE DISTRIBUCION LINEAL
-    std::vector<unsigned char> gapCodingArray1 = creaGapCoding(arregloLineal, n);
-    std::vector<int> sampleArray1 = creaSample(arregloLineal, m, n, b);
+    TipoVariant type = retornaTipo(arreglo[0]); // En base al primer elemento del arreglo, retorna el tipo de dato adecuado
+    std::visit([&](auto&& arg) { // Para transformar type al tipo de dato correspondiente se usa std::visit
+      using T = std::decay_t<decltype(arg)>; // Usa 'T' para asignarle el tipo de dato para gapCodingArray
+      std::vector<T> gapCodingArray = creaGapCoding<T>(arreglo, n); 
+      std::vector<int> sampleArray = creaSample(arreglo, m, n, b);
 
-    //imprimeArray(arregloLineal);
-    // Libera la memoria de arregloLineal
-    arregloLineal.clear();
-    arregloLineal.shrink_to_fit();
+      // imprimeArray(arreglo);
 
-    double distribucionLineal = medirTiempo(gapCodingArray1, sampleArray1, m, b, value);
-    std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << distribucionLineal << " segundos\n" << std::endl;
-    std::cout << "-------------------------------------------------------------------------\n" << std::endl;
-  } // gapCodingArray1, y sampleArray1 se liberan aquí
+      // Libera la memoria del arreglo
+      arreglo.clear();
+      arreglo.shrink_to_fit();
 
-  {
-    std::cout << "_--------------------------DISTRIBUCION NORMAL--------------------------_\n" << std::endl;
-    std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
-    std::cout << "\nNumero a buscar: " <<  value << std::endl;
+      double tiempo = medirTiempo(gapCodingArray, sampleArray, m, b, value); 
+      std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << tiempo << " segundos\n" << std::endl;
+      std::cout << "-------------------------------------------------------------------------\n" << std::endl;
+    }, type);
+  };
 
-    //REPRESENTACION DE DISTRIBUCION NORMAL
-    std::vector<unsigned char> gapCodingArray2 = creaGapCoding(arregloNormal, n);
-    std::vector<int> sampleArray2 = creaSample(arregloNormal, m, n, b);  
+  // Distribución Lineal
+  std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
+  imprimirYMedir(arregloLineal, "DISTRIBUCION LINEAL");
 
-    //imprimeArray(arregloNormal);
-    // Libera la memoria de arregloNormal
-    arregloNormal.clear();
-    arregloNormal.shrink_to_fit();
-    double distribucionNormal = medirTiempo(gapCodingArray2, sampleArray2, m, b, value);
-    std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << distribucionNormal << " segundos\n" << std::endl;
-    std::cout << "-------------------------------------------------------------------------\n" << std::endl;
-  } // gapCodingArray2, y sampleArray2 se liberan aquí
+  // Distribución Normal
+  std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
+  imprimirYMedir(arregloNormal, "DISTRIBUCION NORMAL");
 }
-
