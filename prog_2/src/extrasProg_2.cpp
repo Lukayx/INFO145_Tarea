@@ -41,7 +41,6 @@ TipoVariant retornaTipo(int primerValor){ // en base al primerValor retorna el t
   }
 }
 
-
 void declaraTipos1(){ //declara los tipos de datos que hay para cada template
   std::vector<unsigned char> a;
   std::vector<short> b;

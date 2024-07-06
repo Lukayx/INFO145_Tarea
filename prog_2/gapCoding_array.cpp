@@ -14,8 +14,8 @@ int main(int argc, const char* argv[]){
   srand(time(0));// semilla para los números aleatorios
   b = n/m;
   int epsilon = 21;
-  double media = n*epsilon/4;
-  double desviacionEstandar = 30;
+  double media = n*epsilon/2;
+  double desviacionEstandar = n*44/100;
 
   //A PARTIR DE AQUI COMIENZA A CREAR LOS ARREGLOS Y BUSCAR EL VALOR
   creaArreglos(n, m, b, media, desviacionEstandar, value, epsilon);
@@ -34,7 +34,8 @@ void creaArreglos(size_t n, int m, int b, double media, double desviacionEstanda
       std::vector<T> gapCodingArray = creaGapCoding<T>(arreglo, n); 
       std::vector<int> sampleArray = creaSample(arreglo, m, n, b);
 
-      // imprimeArray(arreglo);
+      // imprimeArray(gapCodingArray);
+      // save_to_file(arreglo, distribucionNombre+".txt");
 
       // Libera la memoria del arreglo
       arreglo.clear();
@@ -48,9 +49,9 @@ void creaArreglos(size_t n, int m, int b, double media, double desviacionEstanda
 
   // Distribución Lineal
   std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
-  imprimirYMedir(arregloLineal, "DISTRIBUCION LINEAL");
+  imprimirYMedir(arregloLineal, "DISTRIBUCION_LINEAL");
 
   // Distribución Normal
   std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
-  imprimirYMedir(arregloNormal, "DISTRIBUCION NORMAL");
+  imprimirYMedir(arregloNormal, "DISTRIBUCION_NORMAL");
 }
