@@ -21,7 +21,7 @@ $(COMPILED_DIR)/explicitArray: explicitArray.cpp $(SRC_DIR1)/*.cpp
 $(COMPILED_DIR)/gapCoding: $(PROG_2)/gapCoding_array.cpp $(SRC_DIR2)/*.cpp $(SRC_DIR1)/creacionProg_1.cpp
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(COMPILED_DIR)/gapPacked: $(PROG_3)/gapPacked_array.cpp $(SRC_DIR3)/*.cpp
+$(COMPILED_DIR)/gapPacked: $(PROG_3)/gapPacked_Array.cpp $(SRC_DIR3)/*.cpp
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
