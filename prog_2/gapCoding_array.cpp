@@ -5,9 +5,9 @@
 #include "include/extrasProg_2.h"
 
 int main(int argc, const char* argv[]){
-  int n, m, b, value;
+  int n, m, b;
 
-  if (!convertirArgumentos(argc, argv, n, m, value)) {
+  if (!convertirArgumentos(argc, argv, n, m)) {
     return EXIT_FAILURE;
   }
 
@@ -17,14 +17,15 @@ int main(int argc, const char* argv[]){
   double media = n*(epsilon/2)/2;
   double desviacionEstandar = n*(epsilon/2)/8;
   //A PARTIR DE AQUI COMIENZA A CREAR LOS ARREGLOS Y BUSCAR EL VALOR
-  creaArreglos(n, m, b, media, desviacionEstandar, value, epsilon);
+  creaArreglos(n, m, b, media, desviacionEstandar, epsilon);
 
   return EXIT_SUCCESS;
 }
 
-void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int value, int epsilon){
+void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int epsilon){
   auto imprimirYMedir = [&](auto&& arreglo, TipoVariant type, const std::string& distribucionNombre) {
     std::cout << "\n_--------------------------" << distribucionNombre << "--------------------------_\n" << std::endl;
+    int value = arreglo[rand() % n];
     std::cout << "Numero a buscar: " <<  value << "\n" <<std::endl;
 
     std::visit([&](auto&& arg) { // Para transformar type al tipo de dato correspondiente se usa std::visit

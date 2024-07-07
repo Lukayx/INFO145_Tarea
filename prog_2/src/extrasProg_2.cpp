@@ -1,7 +1,7 @@
 #include "../include/extrasProg_2.h"
 
-bool convertirArgumentos(int argc, const char* argv[], int& n, int& m, int& value){
-  if (argc <= 3) {
+bool convertirArgumentos(int argc, const char* argv[], int& n, int& m){
+  if (argc <= 2) {
       std::cerr << "Insuficientes argumentos." << std::endl;
       return false;
   }
@@ -9,7 +9,6 @@ bool convertirArgumentos(int argc, const char* argv[], int& n, int& m, int& valu
   try {
       n = std::stoi(argv[1]);
       m = std::stoi(argv[2]);
-      value = std::stoi(argv[3]);
       if(m <= 0 || m >= n) {
         std::cout << "m debe estar dentro del rango [1, n-1]" << std::endl;
         return false;

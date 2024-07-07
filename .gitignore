@@ -10,4 +10,3 @@ explicitArray
 
 # Ignorar directorios de compilación
 build/
-bin/

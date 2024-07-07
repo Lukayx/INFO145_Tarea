@@ -6,14 +6,14 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     // Verificar que se proporcionen los argumentos correctos
-    if (argc < 3) {
-        cout << "Uso: " << argv[0] << " <size> <epsilon>" << endl;
+    if (argc < 2) {
+        cout << "Uso: " << argv[0] << " <size>" << endl;
         return EXIT_FAILURE;
     }
 
     // Obtener los valores de size y epsilon desde los argumentos
     size_t size = atoi(argv[1]);
-    int epsilon = atoi(argv[2]);
+    int epsilon = 20;
     double media = size*(epsilon/2)/2;
     double desviacionEstandar = size*(epsilon/2)/8;
     srand(time(0)); // Inicializa la semilla para rand()
