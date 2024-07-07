@@ -9,4 +9,4 @@ explicitArray
 *.tmp
 
 # Ignorar directorios de compilación
-bin/
+bin/*
