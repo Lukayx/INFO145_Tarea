@@ -14,9 +14,8 @@ int main(int argc, char *argv[]) {
     // Obtener los valores de size y epsilon desde los argumentos
     size_t size = atoi(argv[1]);
     int epsilon = atoi(argv[2]);
-
-    double media = size/2;
-    double desviacionEstandar = size*34/100;
+    double media = size*(epsilon/2)/2;
+    double desviacionEstandar = size*(epsilon/2)/8;
     srand(time(0)); // Inicializa la semilla para rand()
 
     /// Inicializar y crear el arreglo lineal

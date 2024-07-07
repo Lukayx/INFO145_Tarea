@@ -13,10 +13,9 @@ int main(int argc, const char* argv[]){
 
   srand(time(0));// semilla para los números aleatorios
   b = n/m;
-  int epsilon = 21;
-  double media = n*epsilon/2;
-  double desviacionEstandar = n*44/100;
-
+  int epsilon = 20;
+  double media = n*(epsilon/2)/2;
+  double desviacionEstandar = n*(epsilon/2)/8;
   //A PARTIR DE AQUI COMIENZA A CREAR LOS ARREGLOS Y BUSCAR EL VALOR
   creaArreglos(n, m, b, media, desviacionEstandar, value, epsilon);
 
@@ -24,18 +23,17 @@ int main(int argc, const char* argv[]){
 }
 
 void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int value, int epsilon){
-  auto imprimirYMedir = [&](auto&& arreglo, const std::string& distribucionNombre) {
+  auto imprimirYMedir = [&](auto&& arreglo, TipoVariant type, const std::string& distribucionNombre) {
     std::cout << "\n_--------------------------" << distribucionNombre << "--------------------------_\n" << std::endl;
     std::cout << "Numero a buscar: " <<  value << "\n" <<std::endl;
 
-    TipoVariant type = retornaTipo(arreglo[0]); // En base al primer elemento del arreglo, retorna el tipo de dato adecuado
     std::visit([&](auto&& arg) { // Para transformar type al tipo de dato correspondiente se usa std::visit
       using T = std::decay_t<decltype(arg)>; // Usa 'T' para asignarle el tipo de dato para gapCodingArray
       std::vector<T> gapCodingArray = creaGapCoding<T>(arreglo, n); 
       std::vector<int> sampleArray = creaSample(arreglo, m, n, b);
 
       // imprimeArray(gapCodingArray);
-      // save_to_file(arreglo, distribucionNombre+".txt");
+      save_to_file(arreglo, distribucionNombre+".txt");
 
       // Libera la memoria del arreglo
       arreglo.clear();
@@ -49,9 +47,9 @@ void creaArreglos(size_t n, int m, int b, double media, double desviacionEstanda
 
   // Distribución Lineal
   std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
-  imprimirYMedir(arregloLineal, "DISTRIBUCION_LINEAL");
+  imprimirYMedir(arregloLineal, char(),  "DISTRIBUCION_LINEAL");
 
   // Distribución Normal
   std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
-  imprimirYMedir(arregloNormal, "DISTRIBUCION_NORMAL");
+  imprimirYMedir(arregloNormal, int(), "DISTRIBUCION_NORMAL");
 }

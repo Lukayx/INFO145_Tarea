@@ -24,6 +24,20 @@ bool convertirArgumentos(int argc, const char* argv[], int& n, int& m, int& valu
   return true;
 }
 
+// Función para guardar números en un archivo
+template <typename t>
+void save_to_file(const std::vector<t>& numbers, const std::string& filename) {
+  std::ofstream file(filename);
+  if (file.is_open()) {
+    for (t num : numbers) {
+      file << (int)num << '\n';
+    }
+    file.close();
+  } else {
+    std::cerr << "No se pudo abrir el archivo " << filename << std::endl;
+  }
+}
+
 template<typename T>
 void imprimeArray(std::vector<T>& v){
   for (size_t i = 0; i < v.size(); i++)
@@ -31,21 +45,15 @@ void imprimeArray(std::vector<T>& v){
   std::cout << "\n\n";
 }
 
-TipoVariant retornaTipo(int primerValor){ // en base al primerValor retorna el tipo de dato adecuado
-  if(primerValor <= std::numeric_limits<unsigned char>::max()) {
-    return static_cast<unsigned char>(0);
-  } else if (primerValor <= std::numeric_limits<short>::max()) {
-    return short();
-  } else {
-    return int();
-  }
-}
-
 void declaraTipos1(){ //declara los tipos de datos que hay para cada template
   std::vector<unsigned char> a;
   std::vector<short> b;
   std::vector<int> c;
+  std::string text = "text";
   imprimeArray(a);
   imprimeArray(b);
   imprimeArray(c);
+  save_to_file(a, text);
+  save_to_file(b, text);
+  save_to_file(c, text);
 }
