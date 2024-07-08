@@ -3,13 +3,9 @@
 #include "include/creacionProg_3.h"
 
 int main() {
-  srand(time(0));               
-  size_t size = 100000000;      // Tamaño del arreglo lineal
-  int epsilon = 10;  
-
-  std::vector<int> gapCodingArray; // Creación de los arreglo
-  creaArreglos(gapCodingArray, size, epsilon);
   
+  std::vector<int> gapCodingArray = readFile("DISTRIBUCION_LINEAL.txt"); // Llama a la función para leer datos desde archivo
+
   std::vector<int> frecs(256, 0); // Vector para las frecuencias de los caracteres
   
   for (char ch : gapCodingArray) { // Llena el vector frecs con las frecuencias de los caracteres según tus datos
