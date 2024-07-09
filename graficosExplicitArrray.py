@@ -26,26 +26,25 @@ except ValueError:
 
 # Crear la gráfica para tiempos de búsqueda
 plt.figure(figsize=(10, 6))
-plt.plot(sizes, times_lineal, label='Tiempo Arreglo Lineal', marker='o')
-plt.plot(sizes, times_normal, label='Tiempo Arreglo Normal', marker='o')
+plt.plot(sizes, times_lineal, label='Tiempo Arreglo con distribucion Lineal', marker='o')
+plt.plot(sizes, times_normal, label='Tiempo Arreglo con distribucion Normal', marker='o')
 plt.title('Tiempos de Búsqueda Binaria')
 plt.xlabel('Tamaño del Arreglo')
 plt.ylabel('Tiempo (segundos)')
 plt.yscale('log') 
 plt.legend()
-plt.grid(True)
+plt.grid(True, which="both", ls="--")
 plt.savefig('GraficosAExplicitos_tiempos_busqueda_Explicit.png')  # Guardar como imagen
 plt.close()
 
 # Crear la gráfica para espacios utilizados en kilobytes
 plt.figure(figsize=(10, 6))
-plt.plot(sizes, space_lineal, label='Espacio Arreglo Lineal (KB)', marker='o', markersize=4, linestyle='-')
-plt.plot(sizes, space_normal, label='Espacio Arreglo Normal (KB)', marker='o', markersize=4, linestyle='-')
+plt.plot(sizes, space_lineal, label='Espacio Arreglo con distribucion Lineal (KB)', marker='o', markersize=4, linestyle='-')
+plt.plot(sizes, space_normal, label='Espacio Arreglo con distribucion Normal (KB)', marker='o', markersize=4, linestyle='-')
 plt.title('Espacios Utilizados por los Arreglos')
 plt.xlabel('Tamaño del Arreglo')
-plt.ylabel('Espacio (KB)')
 plt.yscale('log') 
 plt.legend()
-plt.grid(True)
+plt.grid(True, which="both", ls="--")
 plt.savefig('GraficosAExplicitos_espacios_utilizados.png')  # Guardar como imagen
 plt.close()
