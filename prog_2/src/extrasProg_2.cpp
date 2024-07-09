@@ -1,17 +1,15 @@
 #include "../include/extrasProg_2.h"
 
-bool convertirArgumentos(int argc, const char* argv[], int& n, int& m){
-  if (argc <= 2) {
+bool convertirArgumentos(int argc, const char* argv[], int& n){
+  if (argc <= 1) {
       std::cerr << "Insuficientes argumentos." << std::endl;
       return false;
   }
-  
   try {
       n = std::stoi(argv[1]);
-      m = std::stoi(argv[2]);
-      if(m <= 0 || m >= n) {
-        std::cout << "m debe estar dentro del rango [1, n-1]" << std::endl;
-        return false;
+      if(n<=1) {
+        std::cout << "n debe ser mayor que 1"<< std::endl;
+        exit(0);
       }
   } catch (const std::invalid_argument& e) {
       std::cerr << "Error: Argumentos inválidos." << std::endl;

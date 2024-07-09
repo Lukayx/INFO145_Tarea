@@ -52,39 +52,46 @@ int main(int argc, char *argv[]) {
     double media = size*(epsilon/2)/2;
     double desviacionEstandar = size*(epsilon/2)/8;
     srand(time(0)); // Inicializa la semilla para rand()
-    for (int i=0;i<=100;i++)
+    for (int i=0;i<24;i++)
     {
-        /// Inicializar y crear el arreglo lineal
-        vector<int> arrayLineal = creaArregloLineal(size, epsilon);
+      /// Inicializar y crear el arreglo lineal
+      vector<int> arrayLineal = creaArregloLineal(size, epsilon);
 
-        // Medir el tiempo de búsqueda en el arreglo lineal
+      // Medir el tiempo de búsqueda en el arreglo lineal
+      double tarrayLineal = 0;
+      for (size_t i = 0; i < 20; i++)
+      {
         int numeroLineal = arrayLineal[rand() % size]; // Número a buscar
-        double tarrayLineal = medirTiempo(arrayLineal, numeroLineal); // Inicia búsqueda binaria y mide el tiempo
-        cout << "Numero del array a buscar: " << numeroLineal <<endl; 
-        cout <<"Binary Search en Array lineal de largo " << size 
-                << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
+        tarrayLineal += medirTiempo(arrayLineal, numeroLineal); // Inicia búsqueda binaria y mide el tiempo
+      }
+      tarrayLineal/=20;
+      // cout << "Numero del array a buscar: " << numeroLineal <<endl; 
+      cout <<"Binary Search en Array lineal de largo " << size 
+              << " tarda: " << fixed << setprecision(10) << tarrayLineal << " segundos" << endl;
+      // Liberar la memoria del arreglo lineal
 
-        // Liberar la memoria del arreglo lineal
-
-        int memoryArrLineal = stoi(getMemoryUsage(pid));
-        arrayLineal.clear();
-        arrayLineal.shrink_to_fit();
-        
-        // Inicializar y crear el arreglo normal
-        vector<int> arrayNormal = generarArregloNormal(size, media, desviacionEstandar);
-
-        // Medir el tiempo de búsqueda en el arreglo normal
+      int memoryArrLineal = stoi(getMemoryUsage(pid));
+      arrayLineal.clear();
+      arrayLineal.shrink_to_fit();
+      
+      // Inicializar y crear el arreglo normal
+      vector<int> arrayNormal = generarArregloNormal(size, media, desviacionEstandar);
+      double tarrayNormal = 0;
+      // Medir el tiempo de búsqueda en el arreglo normal
+      for (size_t i = 0; i < 20; i++)
+      {
         int numeroNormal = arrayNormal[rand() % size]; // Número a buscar
-        double tarrayNormal = medirTiempo(arrayNormal, numeroNormal); // Inicia búsqueda binaria y mide el tiempo
-        cout << "Numero del array a buscar: " << numeroNormal <<endl; 
-        cout << "Binary Search en Array normal de largo " << size 
-                << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
-        int memoryArrNormal = stoi(getMemoryUsage(pid));
-        arrayNormal.clear();
-        arrayNormal.shrink_to_fit();
-        size = size + 10000000;
-        guardarResultados("../resExplicit.csv", size, tarrayLineal, tarrayNormal,memoryArrLineal,memoryArrNormal );
-    
+        tarrayNormal += medirTiempo(arrayNormal, numeroNormal); // Inicia búsqueda binaria y mide el tiempo
+      }
+      tarrayNormal/=20;
+      // cout << "Numero del array a buscar: " << numeroNormal <<endl; 
+      cout << "Binary Search en Array normal de largo " << size 
+              << " tarda: " << fixed << setprecision(10) << tarrayNormal << " segundos" << endl;
+      int memoryArrNormal = stoi(getMemoryUsage(pid));
+      arrayNormal.clear();
+      arrayNormal.shrink_to_fit();
+      size *= 2;
+      guardarResultados("resExplicit.csv", size, tarrayLineal, tarrayNormal,memoryArrLineal,memoryArrNormal );
     }
     return EXIT_SUCCESS;
 }

@@ -17,4 +17,4 @@ void obtener_y_mostrar_memoria(std::string nombre_etiqueta);
 template <typename t>
 void save_to_file(const std::vector<t>& numbers, const std::string& filename);
 
-bool convertirArgumentos(int argc, const char* argv[], int& n, int& m);
+bool convertirArgumentos(int argc, const char* argv[], int& n);

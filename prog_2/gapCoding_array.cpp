@@ -23,11 +23,11 @@ size_t start, end;
 }
 
 // Función para guardar los resultados en un archivo CSV
-void guardarResultados(const std::string& filename, size_t n, int m, double tiempoLineal, int espacioLineal, double tiempoNormal, int espacioNormal) {
+void guardarResultados(const std::string& filename, size_t n, double tiempoLineal, int espacioLineal, double tiempoNormal, int espacioNormal) {
   std::ofstream file(filename.c_str(), std::ios::app);
   if (file.is_open()) {
     printf("a");
-    file << n << "," << m << ","  << std::fixed << std::setprecision(10) << tiempoLineal << "," << espacioLineal << "," << tiempoNormal << "," << espacioNormal << std::endl;
+    file << n << ","  << std::fixed << std::setprecision(10) << tiempoLineal << "," << espacioLineal << "," << tiempoNormal << "," << espacioNormal << std::endl;
     file.close();
   } else {
     std::cerr << "No se pudo abrir el archivo " << filename << std::endl;
@@ -38,11 +38,12 @@ int main(int argc, const char* argv[]){
   int n, m, b;
   pid_t pid = getpid();
   std::cout << "Memory usage for PID " << pid << ":\n" << std::endl;
-  if(!convertirArgumentos(argc, argv, n, m)) {
+  if(!convertirArgumentos(argc, argv, n)) {
     return EXIT_FAILURE;
   }
   
   srand(time(0));// semilla para los números aleatorios
+  m = log2(n);
   b = n/m;
   int epsilon = 20;
   double media = n*(epsilon/2)/2;
@@ -56,19 +57,19 @@ int main(int argc, const char* argv[]){
 
 void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int epsilon, pid_t pid){
   auto imprimirYMedir = [&](auto&& arreglo, TipoVariant type, double& tiempo, int& memory, const std::string& distribucionNombre) {
-    std::cout << "\n_--------------------------" << distribucionNombre << "--------------------------_\n" << std::endl;
+    // std::cout << "\n_--------------------------" << distribucionNombre << "--------------------------_\n" << std::endl;
     int value = arreglo[rand() % n];
     std::cout << "Numero a buscar: " <<  value << "\n" <<std::endl;
     std::visit([&](auto&& arg) { // Para transformar type al tipo de dato correspondiente se usa std::visit
       using T = std::decay_t<decltype(arg)>; // Usa 'T' para asignarle el tipo de dato para gapCodingArray
 
-      std::cout << "Se creó arreglo: " << getMemoryUsage(pid);  
+      // std::cout << "Se creó arreglo: " << getMemoryUsage(pid);  
       std::vector<T> gapCodingArray = creaGapCoding<T>(arreglo, n); 
       
-      std::cout << "\nSe creó gapCodingArray: " << getMemoryUsage(pid);
+      // std::cout << "\nSe creó gapCodingArray: " << getMemoryUsage(pid);
       std::vector<int> sampleArray = creaSample(arreglo, m, n, b);
       
-      std::cout << "\nSe creó sampleArray: " << getMemoryUsage(pid);
+      // std::cout << "\nSe creó sampleArray: " << getMemoryUsage(pid);
 
       // imprimeArray(gapCodingArray);
       // save_to_file(arreglo, distribucionNombre+".txt");
@@ -77,30 +78,38 @@ void creaArreglos(size_t n, int m, int b, double media, double desviacionEstanda
       arreglo.clear();
       arreglo.shrink_to_fit();
 
-      memory = stoi(getMemoryUsage(pid));
-      std::cout << "\nSe borró de memoria arregloLineal: " << memory;
+      memory += stoi(getMemoryUsage(pid));
+      // std::cout << "\nSe borró de memoria arregloLineal: " << memory;
 
-      tiempo = medirTiempo(gapCodingArray, sampleArray, m, b, value); 
-      std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << tiempo << " segundos\n" << std::endl;
-      std::cout << "-------------------------------------------------------------------------\n" << std::endl;
+      tiempo += medirTiempo(gapCodingArray, sampleArray, m, b, value); 
+      // std::cout << "Tiempo que tardó el Binary Search: " << std::fixed << std::setprecision(10) << tiempo << " segundos\n" << std::endl;
+      // std::cout << "-------------------------------------------------------------------------\n" << std::endl;
 
     }, type);
   };
-
-  double tiempoLineal, tiempoNormal;
-  int espacioLineal, espacioNormal;
-
-  // Distribución Lineal
-  std::cout << "Inicia representacion 1: " << getMemoryUsage(pid);
-  std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
-
-  imprimirYMedir(arregloLineal, static_cast<unsigned char>(0), tiempoLineal, espacioLineal,  "DISTRIBUCION_LINEAL");
-
-
-  // Distribución Normal
-  std::cout << "\nInicia representacion 2: " << getMemoryUsage(pid);
-  std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
-  imprimirYMedir(arregloNormal, int(), tiempoNormal, espacioNormal, "DISTRIBUCION_NORMAL");
-
-  guardarResultados("resGapCoding.csv", n, m, tiempoLineal, espacioLineal, tiempoNormal, espacioNormal);
+  for (size_t i = 0; i < 24; i++)
+  {
+    double tiempoLineal = 0.0, tiempoNormal = 0.0;
+    int espacioLineal = 0, espacioNormal = 0;
+    // Distribución Lineal
+    // std::cout << "Inicia representacion 1: " << getMemoryUsage(pid);
+    for (size_t i = 0; i < 20; i++){
+      std::vector<int> arregloLineal = creaArregloLineal(n, epsilon);
+      imprimirYMedir(arregloLineal, static_cast<unsigned char>(0), tiempoLineal, espacioLineal,  "DISTRIBUCION_LINEAL");
+      // Distribución Normal
+      // std::cout << "\nInicia representacion 2: " << getMemoryUsage(pid);
+      std::vector<int> arregloNormal = generarArregloNormal(n, media, desviacionEstandar);
+      imprimirYMedir(arregloNormal, int(), tiempoNormal, espacioNormal, "DISTRIBUCION_NORMAL");
+    }
+    tiempoLineal/=20;
+    espacioLineal/=20;
+    tiempoNormal/=20;
+    espacioNormal/=20;
+    guardarResultados("resGapCoding.csv", n, tiempoLineal, espacioLineal, tiempoNormal, espacioNormal);
+    n *= 2;
+    m = log2(n);
+    b = n/m;
+    media = n*(epsilon/2)/2;
+    desviacionEstandar = n*(epsilon/2)/8;
+  }
 }
