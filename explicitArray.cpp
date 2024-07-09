@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
         int memoryArrNormal = stoi(getMemoryUsage(pid));
         arrayNormal.clear();
         arrayNormal.shrink_to_fit();
-        size = size + 10000;
+        size = size + 10000000;
         guardarResultados("../resExplicit.csv", size, tarrayLineal, tarrayNormal,memoryArrLineal,memoryArrNormal );
     
     }
