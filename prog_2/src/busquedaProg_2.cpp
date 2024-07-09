@@ -11,7 +11,7 @@ int binarySearch(std::vector<int>& sampleArray, int left, int right, int num, in
     return binarySearch(sampleArray, left, right, num, b, gapCoding);
   }
   return searchValor(gapCoding, sampleArray[mid], mid*b, num); // cuando left==rigth entonces llamará a la función searchX para buscar a partir de ahí
-}
+} 
 
 template <typename T>
 int searchValor(std::vector<T>& gapCoding, int valor, int indice, int num){ // valor esta justo donde el indice indica 
@@ -45,9 +45,9 @@ double medirTiempo(std::vector<T>& gapCodingArray, std::vector<int>& sampleArray
   auto fin = std::chrono::steady_clock::now(); // Captura el tiempo de fin
 
   if(indice != -1) 
-    std::cout << "El índice donde está ese valor es el " << indice << std::endl;
+    std::cout << "\nEl índice donde está ese valor es el " << indice << std::endl;
   else 
-    std::cout << "El valor no se encontró en el arreglo." << std::endl;
+    std::cout << "\nEl valor no se encontró en el arreglo." << std::endl;
 
   // Calcula la duración en segundos como un valor de tipo double
   return std::chrono::duration<double>(fin - inicio).count();

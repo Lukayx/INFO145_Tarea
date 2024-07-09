@@ -4,4 +4,4 @@
 #include <iomanip> //este sirve para la subpresición del tiempo que tarda
 #include <climits>
 
-void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int epsilon);
+void creaArreglos(size_t n, int m, int b, double media, double desviacionEstandar, int epsilon, pid_t pid);

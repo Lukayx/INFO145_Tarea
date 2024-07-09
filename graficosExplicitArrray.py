@@ -7,7 +7,7 @@ times_lineal = []
 times_normal = []
 
 try:
-    with open('resExplicit.csv', 'r') as file:
+    with open('resGapCoding.csv', 'r') as file:
         for line in file:
             size, time_lineal, time_normal = line.strip().split(',')
             sizes.append(int(size))

@@ -2,11 +2,10 @@
 
 template <typename T>
 std::vector<T> creaGapCoding(std::vector<int>& arregloLineal, int n){
-  // imprimeArray(arregloLineal);
   std::vector<T> gapCoding_Array;
   gapCoding_Array.reserve(n);  // Reservar espacio para evitar realocaciones frecuentes
 
-   gapCoding_Array.push_back(static_cast<T>(arregloLineal[0])); // Iniciar con el primer valor
+  gapCoding_Array.push_back(static_cast<T>(arregloLineal[0])); // Iniciar con el primer valor
   
   for (int i = 1; i < n; i++){
     gapCoding_Array.push_back(static_cast<T>(arregloLineal[i] - arregloLineal[i-1])); // Calcula y agrega el gap

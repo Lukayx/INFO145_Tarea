@@ -15,8 +15,8 @@ int main() {
 
     std::cout << "short:\n";
     std::cout << "  Mínimo: " << SHRT_MIN << "\n";
-    std::cout << "  Máximo: " << SHRT_MAX << "\n\n";
 
+    std::cout << "  Máximo: " << SHRT_MAX << "\n\n";
     std::cout << "unsigned short:\n";
     std::cout << "  Máximo: " << USHRT_MAX << "\n\n";
 
