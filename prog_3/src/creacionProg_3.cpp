@@ -1,40 +1,38 @@
 #include "../include/creacionProg_3.h"
 
 // Construye el árbol de Huffman    
-nodeH* HuffmanTree(const std::vector<int>& frecs){     
-  std::priority_queue<nodeH*, std::vector<nodeH*>, decltype(&compareNodes)> minHeap(&compareNodes);
+nodeH* HuffmanTree(const std::unordered_map<int, int>& frecs){     
+  std::priority_queue<nodeH*, std::vector<nodeH*>, compare> minHeap;
   
-  for (size_t i = 0; i < frecs.size(); ++i) {  // Crea nodos para cada char con frec>0 y lo pone en el queue
-    if (frecs[i] > 0) 
-      minHeap.push(createNode(static_cast<char>(i), frecs[i]));
+  for (auto& pair : frecs) {
+    minHeap.push(createNode(static_cast<char>(pair.first), pair.second));
   }
 
-  while (minHeap.size() > 1){ 
+  while (minHeap.size() != 1) {
     nodeH* izq = minHeap.top();
     minHeap.pop();
+
     nodeH* der = minHeap.top();
     minHeap.pop();
-    nodeH* newNode = createNode('\0', izq->frec + der->frec);
+
+    int combinedFrec = izq->frec + der->frec;
+    nodeH* newNode = createNode('\0', combinedFrec);
+
     newNode->izq = izq;
     newNode->der = der;
+
     minHeap.push(newNode);
   }
-
-  if (!minHeap.empty()) {
-    return minHeap.top();
-  }else {
-    return nullptr; // Cola vacia
-  }
+   return minHeap.top();
 }
 
 // Crea los nodos del árbol
 nodeH* createNode(char data, int frec) {
-    nodeH* newNode = new nodeH(data, frec);
-    return newNode;
+  return new nodeH(data, frec);
 }
 
 // Función que genera los códigos de Huffman
-void generateHuffmanCodes(nodeH* root, std::string code, std::unordered_map<char, std::string>& huffmanCodes) { 
+void generateHuffmanCodes(nodeH* root, std::string code, std::unordered_map<int, std::string>& huffmanCodes) { 
   if (!root) return;
   
   if (!root->izq && !root->der) // Si tiene hojas
