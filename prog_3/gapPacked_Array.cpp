@@ -48,7 +48,17 @@ int main() {
 
   std::vector<int> bitsArray = calcularBits(huffmanCodesInt);// Calcular los bits necesarios para cada elemento
   escribirBitsEnArchivo(bitsArray, "bits_huffmanCodesInt.txt");
+  
+  std::vector<int> bitsComprimidos = {0, 1, 1, 0, 1};  
+  int valorDecodificado = buscarEnArbolHuffman(bitsComprimidos, raizHuffman);
 
+  if (valorDecodificado != -1) {
+      std::cout << "Valor decodificado: " << valorDecodificado << std::endl;
+  } else {
+      std::cout << "Valor no encontrado en el árbol de Huffman." << std::endl;
+  }
+
+  
   deleteHuffmanTree(root); // Liberar la memoria del árbol de Huffman
   std::cout << "Listo" << std::endl;
 
