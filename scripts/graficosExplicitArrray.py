@@ -31,8 +31,7 @@ plt.plot(sizes, times_normal, label='Tiempo Arreglo con distribucion Normal', ma
 plt.title('Tiempos de Búsqueda Binaria')
 plt.xlabel('Tamaño del Arreglo')
 plt.ylabel('Tiempo (segundos)')
-plt.xscale('log')  # Escala logarítmica en el ejeL x
-plt.yscale('log')  # Escala logarítmica en el eje y
+plt.yscale('log') 
 plt.legend()
 plt.grid(True, which="both", ls="--")
 plt.savefig('GraficosAExplicitos_tiempos_busqueda_Explicit.png')  # Guardar como imagen
@@ -40,12 +39,11 @@ plt.close()
 
 # Crear la gráfica para espacios utilizados en kilobytes
 plt.figure(figsize=(10, 6))
-plt.plot(sizes, space_lineal, label='Espacio Arreglo con distribucion Lineal (KB)', marker='o', linestyle='-')
-plt.plot(sizes, space_normal, label='Espacio Arreglo con distribucion Normal (KB)', marker='o', linestyle='-')
+plt.plot(sizes, space_lineal, label='Espacio Arreglo con distribucion Lineal (KB)', marker='o', markersize=4, linestyle='-')
+plt.plot(sizes, space_normal, label='Espacio Arreglo con distribucion Normal (KB)', marker='o', markersize=4, linestyle='-')
 plt.title('Espacios Utilizados por los Arreglos')
 plt.xlabel('Tamaño del Arreglo')
-plt.yscale('log')  # Escala logarítmica en el eje y
-plt.xscale('log')  # Escala logarítmica en el eje x
+plt.yscale('log') 
 plt.legend()
 plt.grid(True, which="both", ls="--")
 plt.savefig('GraficosAExplicitos_espacios_utilizados.png')  # Guardar como imagen

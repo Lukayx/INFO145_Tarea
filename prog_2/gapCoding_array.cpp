@@ -1,4 +1,4 @@
-#include "../include/creacionProg_1.h"
+#include "../prog_1/include/creacionProg_1.h"
 #include "include/gapCodingArray.h"
 #include "include/busquedaProg_2.h"
 #include "include/creacionProg_2.h"
@@ -105,7 +105,7 @@ void creaArreglos(size_t n, int m, int b, double media, double desviacionEstanda
     espacioLineal/=20;
     tiempoNormal/=20;
     espacioNormal/=20;
-    guardarResultados("resGapCoding.csv", n, tiempoLineal, espacioLineal, tiempoNormal, espacioNormal);
+    guardarResultados("../scripts/resGapCoding.csv", n, tiempoLineal, espacioLineal, tiempoNormal, espacioNormal);
     n *= 2;
     m = log2(n);
     b = n/m;

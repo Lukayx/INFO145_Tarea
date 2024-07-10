@@ -1,7 +1,8 @@
 # Directorios de origen y destino
+PROG_1 = prog_1
 PROG_2 = prog_2
 PROG_3 = prog_3
-SRC_DIR1 = src
+SRC_DIR1 = $(PROG_1)/src
 SRC_DIR2 = $(PROG_2)/src
 SRC_DIR3 = $(PROG_3)/src
 INCLUDE_DIR1 = include
@@ -15,8 +16,9 @@ BINS = $(COMPILED_DIR)/explicitArray $(COMPILED_DIR)/gapCoding $(COMPILED_DIR)/g
 
 all: clean $(BINS)
 
-$(COMPILED_DIR)/explicitArray: explicitArray.cpp $(SRC_DIR1)/*.cpp
-	$(CC) $(CFLAGS) -o $@ $^
+$(COMPILED_DIR)/explicitArray: $(PROG_1)/explicitArray.cpp $(SRC_DIR1)/busquedaProg_1.cpp $(SRC_DIR1)/creacionProg_1.cpp
+	@mkdir -p $(COMPILED_DIR)
+	$(CC) $(CFLAGS) -I$(INCLUDE_DIR1) -o $@ $^
 
 $(COMPILED_DIR)/gapCoding: $(PROG_2)/gapCoding_array.cpp $(SRC_DIR2)/*.cpp $(SRC_DIR1)/creacionProg_1.cpp
 	$(CC) $(CFLAGS) -o $@ $^
