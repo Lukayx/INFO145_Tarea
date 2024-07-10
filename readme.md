@@ -14,14 +14,17 @@ Para compilar todos los programas de este repositorio se debe estar en la raiz d
 ```
 Para compliar solo prog_1,ejecutar:
 ```sh
+    make clean
     make bin/explicitArray
 ```
 asi tambien para solo prog_2,ejecutar:
 ```sh
+    make clean
     make bin/gapCoding
 ```
 asi tambien para solo prog_3,ejecutar:
 ```sh
+    make clean
     make bin/gapPacked
 ```
 ## Ejecutar programas
@@ -42,7 +45,7 @@ donde \<n\> es el tamaño del Array
 ```
 donde \<n\>  es el tamaño del Array
 
-Ademas los resultados de las ejecuciones de explicitArray, y gapCoding se guardan en archios cvs precentes en la carpeta scrpits 
+Ademas los resultados de las ejecuciones de explicitArray, y gapCoding se guardan en archios .csv precentes en la carpeta scrpits 
 ## Para graficar
 ### Requisitos:
 para ejecutar los programas se debe contar minimo con python 3.10,ademas se debe estar instalada la libreria matplotlib.
