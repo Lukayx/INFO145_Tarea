@@ -54,11 +54,17 @@ instalacion libreria matplotlib:
     pip install matplotlib
 ```
 
-para obtener ls graficos de ExplicitArrray y GapCodingArray,se debe estar dentro de la carpeta scripts y ejecutar:
+para obtener los graficos de ExplicitArrray, GapCodingArray,gapPacked_Array.
+se debe estar dentro de la carpeta scripts y ejecutar:
 
 ```sh
     python3 graficosExplicitArrray.py
 ```
 ```sh
     python3 graficosGapCodingArray.py 
+
+```
+```sh
+    python3 creaGRaficosHuffman.py 
+    
 ```
