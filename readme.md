@@ -3,8 +3,8 @@
 ## Clonacion repositorio
 
 ```sh
-    git clone <URL_DEL_REPOSITORIO>
-    cd <NOMBRE_DEL_PROYECTO>
+    git clone https://github.com/Lukayx/INFO145_Tarea.git
+    cd INFO145_Tarea
 ```
 
 ## Complilacion
