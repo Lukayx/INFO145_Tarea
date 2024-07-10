@@ -76,3 +76,20 @@ void escribirBitsEnArchivo(const std::vector<int>& bitsArray, const std::string&
     }
     outFile.close();
 }
+
+int buscarEnArbolHuffman(const std::vector<int>& bitsComprimidos, HuffmanNode* raiz) {
+    HuffmanNode* nodoActual = raiz;
+
+    for (int bit : bitsComprimidos) {
+        if (bit == 0 && nodoActual->izquierdo != nullptr) {
+            nodoActual = nodoActual->izquierdo;
+        } else if (bit == 1 && nodoActual->derecho != nullptr) {
+            nodoActual = nodoActual->derecho;
+        }
+
+        if (nodoActual->esHoja()) {
+            return nodoActual->valor;
+        }
+    }
+    return -1;  
+}
