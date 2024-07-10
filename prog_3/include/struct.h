@@ -12,3 +12,11 @@ struct HuffmanNode{
     this->der = nullptr;
   }
 }; typedef struct HuffmanNode nodeH;
+
+struct compare {
+  bool operator()(nodeH* izq, nodeH* der) {
+    return izq->frec > der->frec;
+  }
+};
+
+
