@@ -26,16 +26,36 @@ asi tambien para solo prog_3,ejecutar:
 ```
 ## Ejecutar programas
 Para ejecutar un programa de los precentes en el repositorio se debe estar en la capeta bin y en esta carpeta para ejecutar en la terminal:
-
 ### Para ejecutar prog_1(explicitArray)
 ```sh
     ./explicitArray <n>
 ```
+donde \<n\> es el tamaño del Array
 ### Para ejecutar prog_2(gapCoding_array)
 ```sh
     ./gapCoding <n>
 ```
+donde \<n\> es el tamaño del Array
 ### Para ejecutar prog_3(gapPacked_Array)
 ```sh
     ./gapPacked <n>
+```
+donde \<n\>  es el tamaño del Array
+
+Ademas los resultados de las ejecuciones de explicitArray, y gapCoding se guardan en archios cvs precentes en la carpeta scrpits 
+## Para graficar
+### Requisitos:
+para ejecutar los programas se debe contar minimo con python 3.10,ademas se debe estar instalada la libreria matplotlib.
+instalacion libreria matplotlib:
+```sh
+    pip install matplotlib
+```
+
+para obtener ls graficos de ExplicitArrray y GapCodingArray,se debe estar dentro de la carpeta scripts y ejecutar:
+
+```sh
+    python3 graficosExplicitArrray.py
+```
+```sh
+    python3 graficosGapCodingArray.py 
 ```
