@@ -45,7 +45,7 @@ donde \<n\> es el tamaño del Array
 ```
 donde \<n\>  es el tamaño del Array
 
-Ademas los resultados de las ejecuciones de explicitArray, y gapCoding se guardan en archios .csv precentes en la carpeta scrpits 
+Ademas los resultados de las ejecuciones de explicitArray,gapCoding,gapPacked_Array se guardan en archios .csv precentes en la carpeta scrpits 
 ## Para graficar
 ### Requisitos:
 para ejecutar los programas se debe contar minimo con python 3.10,ademas se debe estar instalada la libreria matplotlib.
